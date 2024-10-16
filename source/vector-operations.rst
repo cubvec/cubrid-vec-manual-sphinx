@@ -50,14 +50,18 @@ Distance Operators
  Specifications
 ****************
 
-vector_dims(vector) -> integer
-==============================
+VECTOR_DIMS (vector) -> integer
+===============================
 
-.. code:: bnf
+VECTOR_DIMENSION_COUNT (vector) -> integer
+==========================================
+
+.. code:: sql
 
    VECTOR_DIMS ( EXPR )
    VECTOR_DIMENSION_COUNT ( EXPR )
 
+-  VECTOR_DIMS and VECTOR_DIMENSION_COUNT are equivalent.
 -  It returns the number of dimensions of a vector as a NUMBER.
 -  EXPR must evaluate to a vector.
 -  If EXPR is NULL, NULL is returned.
@@ -65,14 +69,57 @@ vector_dims(vector) -> integer
 
 .. _vector_dimsvector---integer-1:
 
-vector_dims(vector) -> integer
+VECTOR_NORM (vector) -> double
 ==============================
 
-vector_dimension_count(vector) -> integer
-=========================================
+.. code:: sql
 
-vector_norm(vector) -> double
-=============================
+   VECTOR_NORM ( EXPR )
 
-vector_dimension_format(vector) -> INT8 | FLOAT32 | FLOAT64
-===========================================================
+VECTOR_DIMENSION_FORMAT (vector) -> INT8 | FLOAT32 | FLOAT64
+============================================================
+
+.. code:: sql
+
+   VECTOR_DIMENSION_FORMAT ( EXPR )
+
+***************************
+ Vector Distance Functions
+***************************
+
+-  ☐ TODO: Should the distance functions return float or double?
+
+L2_DISTANCE (vector, vector) -> double
+======================================
+
+.. code:: sql
+
+   L2_DISTANCE ( EXPR )
+
+L2_NORMALIZE (vector, vector) -> double
+=======================================
+
+.. code:: sql
+
+   L2_NORMALIZE ( EXPR )
+
+L1_DISTANCE (vector, vector) -> double
+======================================
+
+.. code:: sql
+
+   L1_DISTANCE ( EXPR )
+
+COSINE_DISTANCE (vector, vector) -> double
+==========================================
+
+.. code:: sql
+
+   COSINE_DISTANCE ( EXPR )
+
+INNER_PRODUCT (vector, vector) -> double
+========================================
+
+.. code:: sql
+
+   INNER_PRODUCT ( EXPR )
