@@ -45,10 +45,18 @@
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Vector DDL</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#bnf">BNF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bnf">BNF</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#vector-type-specifications">Vector Type Specifications</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dimension-constraints">Dimension Constraints</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#examples-of-declaration">Examples of Declaration</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#create-table">Create table</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#create-column">Create column</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-table-with-vector-column">Create table with vector column</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#alter-table-to-add-vector-column">Alter table to add vector column</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#additional-example-binary-vector">Additional Example: Binary Vector</a></li>
 </ul>
 </li>
 </ul>
@@ -84,6 +92,8 @@
              
   <section id="vector-ddl">
 <h1>Vector DDL<a class="headerlink" href="#vector-ddl" title="Link to this heading"></a></h1>
+<p>This section describes the Data Definition Language (DDL) for vector
+types.</p>
 <div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="n">vector</span><span class="w"> </span><span class="c1">-- Equivalent to vector(2000)</span>
 
 <span class="n">vector</span><span class="p">(</span><span class="mi">512</span><span class="p">)</span><span class="w"> </span><span class="c1">-- 512-dimensional vector of float32</span>
@@ -94,39 +104,94 @@
 <section id="bnf">
 <h2>BNF<a class="headerlink" href="#bnf" title="Link to this heading"></a></h2>
 <div class="highlight-bnf notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nc">declaration</span><span class="p">&gt;</span> <span class="o">::=</span> &quot;vector&quot; [ &quot;(&quot; [ <span class="p">&lt;</span><span class="nc">vector_type</span><span class="p">&gt;</span> &quot;,&quot; ] <span class="p">&lt;</span><span class="nc">dim</span><span class="p">&gt;</span> &quot;)&quot; ]
-<span class="p">&lt;</span><span class="nc">vector_type</span><span class="p">&gt;</span> <span class="o">::=</span> &quot;float32&quot; | &quot;binary&quot;
+<span class="p">&lt;</span><span class="nc">vector_type</span><span class="p">&gt;</span> <span class="o">::=</span> &quot;float32&quot; | &quot;float64&quot; | &quot;binary&quot;
 <span class="p">&lt;</span><span class="nc">dim</span><span class="p">&gt;</span> <span class="o">::=</span> <span class="p">&lt;</span><span class="nc">positive_integer</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nc">positive_integer</span><span class="p">&gt;</span> <span class="o">::=</span> {digit}+
 </pre></div>
 </div>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">&lt;dim&gt;</span></code> is a positive integer value</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;dim&gt;</span></code> is a positive integer value:</p>
 <ul>
 <li><p>between 1 and 2000 inclusive if and only if <code class="docutils literal notranslate"><span class="pre">&lt;vector_type&gt;</span></code> is
-float32.</p></li>
-<li><p>between 1 and 64000 inclusive if and only if <code class="docutils literal notranslate"><span class="pre">&lt;vector_type&gt;</span></code> is
-binary.</p></li>
+<code class="docutils literal notranslate"><span class="pre">float32</span></code>.</p></li>
+<li><p>between 1 and 1000 inclusive if and only if <code class="docutils literal notranslate"><span class="pre">&lt;vector_type&gt;</span></code> is
+<code class="docutils literal notranslate"><span class="pre">float64</span></code>.</p></li>
+<li><p>between 1 and 64000 inclusive if and only if <code class="docutils literal notranslate"><span class="pre">&lt;vector_type</span></code> is
+<code class="docutils literal notranslate"><span class="pre">binary</span></code>.</p></li>
 </ul>
 </li>
 </ul>
+<section id="vector-type-specifications">
+<h3>Vector Type Specifications<a class="headerlink" href="#vector-type-specifications" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">vector</span></code> data type is a fixed-size multidimensional array that
+can store either floating-point numbers or binary values.</p></li>
+<li><p>Default vector type is <code class="docutils literal notranslate"><span class="pre">float32</span></code> if no type is specified.</p></li>
+<li><p>Dimensions are specified in parentheses after the type.</p></li>
+</ul>
+<section id="dimension-constraints">
+<h4>Dimension Constraints<a class="headerlink" href="#dimension-constraints" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p>For vectors of type <code class="docutils literal notranslate"><span class="pre">float32</span></code>, dimensions must be between 1 and
+2000.</p></li>
+<li><p>For vectors of type <code class="docutils literal notranslate"><span class="pre">float64</span></code>, dimensions must be between 1 and
+1000.</p></li>
+<li><p>For binary vectors, dimensions must be between 1 and 64000.</p></li>
+</ul>
+</section>
+</section>
+<section id="examples-of-declaration">
+<h3>Examples of Declaration<a class="headerlink" href="#examples-of-declaration" title="Link to this heading"></a></h3>
+<ol class="arabic">
+<li><p><strong>Default Vector (float32)</strong></p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="n">vector</span><span class="w"> </span><span class="c1">-- Equivalent to vector(2000)</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>512-dimensional Vector (float32)</strong></p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="n">vector</span><span class="p">(</span><span class="mi">512</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>128-dimensional Vector (float64)</strong></p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="n">vector</span><span class="p">(</span><span class="n">float64</span><span class="p">,</span><span class="w"> </span><span class="mi">128</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
 </section>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
-<section id="create-table">
-<h3>Create table<a class="headerlink" href="#create-table" title="Link to this heading"></a></h3>
+<section id="create-table-with-vector-column">
+<h3>Create table with vector column<a class="headerlink" href="#create-table-with-vector-column" title="Link to this heading"></a></h3>
 <div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">items</span><span class="w"> </span><span class="p">(</span>
 <span class="w">  </span><span class="n">host_year</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
 <span class="w">  </span><span class="n">embedding</span><span class="w"> </span><span class="n">vector</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 <span class="p">);</span>
 </pre></div>
 </div>
+<p>This example creates a table named <cite>items</cite> with a primary key
+<cite>host_year</cite> and an <cite>embedding</cite> column of a 3-dimensional vector.</p>
 </section>
-<section id="create-column">
-<h3>Create column<a class="headerlink" href="#create-column" title="Link to this heading"></a></h3>
+<section id="alter-table-to-add-vector-column">
+<h3>Alter table to add vector column<a class="headerlink" href="#alter-table-to-add-vector-column" title="Link to this heading"></a></h3>
 <div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">items</span>
 <span class="k">ADD</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">embedding</span><span class="w"> </span><span class="n">vector</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
 </pre></div>
 </div>
+<p>This example alters the existing <cite>items</cite> table by adding a new column
+<cite>embedding</cite> of a 3-dimensional vector.</p>
+</section>
+<section id="additional-example-binary-vector">
+<h3>Additional Example: Binary Vector<a class="headerlink" href="#additional-example-binary-vector" title="Link to this heading"></a></h3>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">binary_items</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="n">item_id</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">  </span><span class="n">binary_embedding</span><span class="w"> </span><span class="n">vector</span><span class="p">(</span><span class="nb">binary</span><span class="p">,</span><span class="w"> </span><span class="mi">512</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>This example creates a table with a binary vector of 512 dimensions.</p>
 </section>
 </section>
 </section>
