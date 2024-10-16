@@ -1,19 +1,21 @@
-Vector Index
-============
+##############
+ Vector Index
+##############
 
 This page outlines the CRUD operations for vector indices in CUBRID
 database.
 
 CUBRID only supports HNSW index at the moment.
 
-Create a Vector Index
----------------------
+***********************
+ Create a Vector Index
+***********************
 
 In order to create a vector index, one must specify:
 
-1. the table and the column name where the index will be created onto,
-2. the metric function used for distance calculation,
-3. the index construction parameters (for HNSW, this will be
+#. the table and the column name where the index will be created onto,
+#. the metric function used for distance calculation,
+#. the index construction parameters (for HNSW, this will be
    ``ef_construction`` and ``M``).
 
 In order to effectively use the HNSW index, one must specify:
@@ -21,7 +23,7 @@ In order to effectively use the HNSW index, one must specify:
 -  the search parameter (for HNSW, this will be ``ef_search``).
 
 BNF
-~~~
+===
 
 .. code:: bnf
 
@@ -50,13 +52,14 @@ BNF
 -  ``m`` is the maximum number of connections (edges) each node (vector)
    can have in the graph at each layer of the HNSW structure. It is also
    known as the degree of each node in the graph.
+
 -  ``ef_construction`` controls the size of the dynamic candidate list
    when inserting elements during the index construction phase. It
    defines how many neighbors are checked during the construction of the
    graph when new vectors are added.
 
 Examples
-~~~~~~~~
+========
 
 .. code:: sql
 
@@ -64,16 +67,18 @@ Examples
    ON items (embedding cosine)
    WITH (m = 16, ef_construction = 64);
 
-Inspect Vector Index Options
-----------------------------
+******************************
+ Inspect Vector Index Options
+******************************
 
 .. code:: sql
 
    SELECT embedding_hnsw_idx
    FROM items;
 
-Configure Search parameter
---------------------------
+****************************
+ Configure Search parameter
+****************************
 
 -  ``ef_search`` is the exploration factor during search. It is a
    parameter in the HNSW algorithm that controls the number of nearest
@@ -91,23 +96,26 @@ Configure Search parameter
    LIMIT 5
    WITH (ef_search = 64);
 
-Update Vector Index
--------------------
+*********************
+ Update Vector Index
+*********************
 
 Not implemented yet.
 
-Delete Vector Index
--------------------
+*********************
+ Delete Vector Index
+*********************
 
 .. code:: sql
 
    DROP INDEX embedding_hnsw_idx;
 
-Vector Index Configuration
---------------------------
+****************************
+ Vector Index Configuration
+****************************
 
 Memory Usage
-~~~~~~~~~~~~
+============
 
 .. code:: toml
 

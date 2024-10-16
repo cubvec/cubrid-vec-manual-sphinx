@@ -1,5 +1,6 @@
-Vector DDL
-==========
+############
+ Vector DDL
+############
 
 .. code:: sql
 
@@ -9,8 +10,9 @@ Vector DDL
 
    vector(float64, 128) -- 128-dimensional vector of float64
 
-BNF
----
+*****
+ BNF
+*****
 
 .. code:: bnf
 
@@ -26,11 +28,12 @@ BNF
    -  between 1 and 64000 inclusive if and only if ``<vector_type>`` is
       binary.
 
-Examples
---------
+**********
+ Examples
+**********
 
 Create table
-~~~~~~~~~~~~
+============
 
 .. code:: sql
 
@@ -40,7 +43,7 @@ Create table
    );
 
 Create column
-~~~~~~~~~~~~~
+=============
 
 .. code:: sql
 

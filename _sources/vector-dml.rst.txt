@@ -1,11 +1,13 @@
-Vector DML
-==========
+############
+ Vector DML
+############
 
 This page outlines the CRUD operations (Create, Read, Update, Delete)
 for vectors in a database.
 
-Create and Insert a Vector into a Table
----------------------------------------
+*****************************************
+ Create and Insert a Vector into a Table
+*****************************************
 
 To insert vectors into a table:
 
@@ -18,8 +20,9 @@ To insert vectors into a table:
      ('[1,2,3]'),
      ('[4,5,6]');
 
-Read Vectors
-------------
+**************
+ Read Vectors
+**************
 
 To retrieve vectors from the table:
 
@@ -30,7 +33,7 @@ To retrieve vectors from the table:
    LIMIT 5;
 
 Read Nearest Neighbor Vectors
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=============================
 
 You can retrieve the nearest neighbors using either vector distance
 operators or functions.
@@ -58,20 +61,21 @@ Both of the above queries are equivalent.
 -  If a vector index exists, it will be used automatically.
 
 Note on Multiple Vector Indices
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------------
 
 You can create multiple indices for a single vector column, but each
 index must correspond to a different type of distance operator. A single
 vector column can only have one index for each distance type.
 
-Control Vector Index Usage
---------------------------
+****************************
+ Control Vector Index Usage
+****************************
 
 -  ``/*+ VECTOR_INDEX_SCAN (my_col_name) */``: force vector index
 -  ``/*+ NO_VECTOR_INDEX_SCAN */``: force prevent vector index
 
 Force the usage of vector index, if present
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+===========================================
 
 First, you need to create an ANN vector index on ‘embedding’ column of
 table ‘items’.
@@ -89,7 +93,7 @@ present. If no index is found, the optimizer silently ignores the hint.
    LIMIT 5;
 
 Abort the usage of vector index
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+===============================
 
 .. code:: sql
 
@@ -98,8 +102,9 @@ Abort the usage of vector index
    ORDER BY l2_distance(embedding, '[3, 1, 2]')
    LIMIT 5;
 
-Update vector
--------------
+***************
+ Update vector
+***************
 
 .. code:: sql
 
@@ -107,8 +112,9 @@ Update vector
    SET embedding = '[1, 2, 3]'
    WHERE id = 1;
 
-Delete vector
--------------
+***************
+ Delete vector
+***************
 
 .. code:: sql
 
