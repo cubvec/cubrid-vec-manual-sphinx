@@ -18,8 +18,7 @@
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Vector Index" href="vector-index.html" /> 
+    <link rel="search" title="Search" href="search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -42,38 +41,11 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="vector-ddl.html">Vector DDL</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vector-dml.html">Vector DML</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vector-index.html">Vector Index</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Vector Operations</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#basic-vector-functions">Basic Vector Functions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#vector-distance-functions">Vector Distance Functions</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#vector-operators">Vector Operators</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#basic-vector-operators">Basic Vector Operators</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#distance-operators">Distance Operators</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#specifications">Specifications</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#vector-dims-vector-integer">VECTOR_DIMS (vector) -&gt; integer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#vector-dimension-count-vector-integer">VECTOR_DIMENSION_COUNT (vector) -&gt; integer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#vector-norm-vector-double">VECTOR_NORM (vector) -&gt; double</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#vector-dimension-format-vector-int8-float32-float64">VECTOR_DIMENSION_FORMAT (vector) -&gt; INT8 | FLOAT32 | FLOAT64</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#id1">Vector Distance Functions</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#l2-distance-vector-vector-double">L2_DISTANCE (vector, vector) -&gt; double</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#l2-normalize-vector-vector-double">L2_NORMALIZE (vector, vector) -&gt; double</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#l1-distance-vector-vector-double">L1_DISTANCE (vector, vector) -&gt; double</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#cosine-distance-vector-vector-double">COSINE_DISTANCE (vector, vector) -&gt; double</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#inner-product-vector-vector-double">INNER_PRODUCT (vector, vector) -&gt; double</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="vector-operations.html">Vector Operations</a></li>
 </ul>
 
         </div>
@@ -92,7 +64,7 @@
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">Vector Operations</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/vector-operations.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/.conform.6036238.vector-operations.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -168,51 +140,24 @@
 </section>
 <section id="vector-norm-vector-double">
 <span id="vector-dimsvector-integer-1"></span><h3>VECTOR_NORM (vector) -&gt; double<a class="headerlink" href="#vector-norm-vector-double" title="Link to this heading"></a></h3>
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="n">VECTOR_NORM</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">EXPR</span><span class="w"> </span><span class="p">)</span>
-</pre></div>
-</div>
 </section>
 <section id="vector-dimension-format-vector-int8-float32-float64">
 <h3>VECTOR_DIMENSION_FORMAT (vector) -&gt; INT8 | FLOAT32 | FLOAT64<a class="headerlink" href="#vector-dimension-format-vector-int8-float32-float64" title="Link to this heading"></a></h3>
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="n">VECTOR_DIMENSION_FORMAT</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">EXPR</span><span class="w"> </span><span class="p">)</span>
-</pre></div>
-</div>
 </section>
-</section>
-<section id="id1">
-<h2>Vector Distance Functions<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
-<ul class="simple">
-<li><p>☐ TODO: Should the distance functions return float or double?</p></li>
-</ul>
 <section id="l2-distance-vector-vector-double">
 <h3>L2_DISTANCE (vector, vector) -&gt; double<a class="headerlink" href="#l2-distance-vector-vector-double" title="Link to this heading"></a></h3>
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="n">L2_DISTANCE</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">EXPR</span><span class="w"> </span><span class="p">)</span>
-</pre></div>
-</div>
 </section>
 <section id="l2-normalize-vector-vector-double">
 <h3>L2_NORMALIZE (vector, vector) -&gt; double<a class="headerlink" href="#l2-normalize-vector-vector-double" title="Link to this heading"></a></h3>
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="n">L2_NORMALIZE</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">EXPR</span><span class="w"> </span><span class="p">)</span>
-</pre></div>
-</div>
 </section>
 <section id="l1-distance-vector-vector-double">
 <h3>L1_DISTANCE (vector, vector) -&gt; double<a class="headerlink" href="#l1-distance-vector-vector-double" title="Link to this heading"></a></h3>
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="n">L1_DISTANCE</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">EXPR</span><span class="w"> </span><span class="p">)</span>
-</pre></div>
-</div>
 </section>
 <section id="cosine-distance-vector-vector-double">
 <h3>COSINE_DISTANCE (vector, vector) -&gt; double<a class="headerlink" href="#cosine-distance-vector-vector-double" title="Link to this heading"></a></h3>
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="n">COSINE_DISTANCE</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">EXPR</span><span class="w"> </span><span class="p">)</span>
-</pre></div>
-</div>
 </section>
 <section id="inner-product-vector-vector-double">
 <h3>INNER_PRODUCT (vector, vector) -&gt; double<a class="headerlink" href="#inner-product-vector-vector-double" title="Link to this heading"></a></h3>
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="n">INNER_PRODUCT</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">EXPR</span><span class="w"> </span><span class="p">)</span>
-</pre></div>
-</div>
 </section>
 </section>
 </section>
@@ -220,9 +165,7 @@
 
            </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="vector-index.html" class="btn btn-neutral float-left" title="Vector Index" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-    </div>
+          <footer>
 
   <hr/>
 

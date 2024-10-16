@@ -72,54 +72,20 @@ VECTOR_DIMENSION_COUNT (vector) -> integer
 VECTOR_NORM (vector) -> double
 ==============================
 
-.. code:: sql
-
-   VECTOR_NORM ( EXPR )
-
 VECTOR_DIMENSION_FORMAT (vector) -> INT8 | FLOAT32 | FLOAT64
 ============================================================
-
-.. code:: sql
-
-   VECTOR_DIMENSION_FORMAT ( EXPR )
-
-***************************
- Vector Distance Functions
-***************************
-
--  ☐ TODO: Should the distance functions return float or double?
 
 L2_DISTANCE (vector, vector) -> double
 ======================================
 
-.. code:: sql
-
-   L2_DISTANCE ( EXPR )
-
 L2_NORMALIZE (vector, vector) -> double
 =======================================
-
-.. code:: sql
-
-   L2_NORMALIZE ( EXPR )
 
 L1_DISTANCE (vector, vector) -> double
 ======================================
 
-.. code:: sql
-
-   L1_DISTANCE ( EXPR )
-
 COSINE_DISTANCE (vector, vector) -> double
 ==========================================
 
-.. code:: sql
-
-   COSINE_DISTANCE ( EXPR )
-
 INNER_PRODUCT (vector, vector) -> double
-========================================
-
-.. code:: sql
-
-   INNER_PRODUCT ( EXPR )
+=========================================
