@@ -1,0 +1,226 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vector DML &mdash; CUBRID Vector Database  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Vector Index" href="vector-index.html" />
+    <link rel="prev" title="Vector DDL" href="vector-ddl.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            CUBRID Vector Database
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="vector-ddl.html">Vector DDL</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Vector DML</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#create-and-insert-a-vector-into-a-table">Create and Insert a Vector into a Table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#read-vectors">Read Vectors</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#read-nearest-neighbor-vectors">Read Nearest Neighbor Vectors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#note-on-multiple-vector-indices">Note on Multiple Vector Indices</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#control-vector-index-usage">Control Vector Index Usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#force-the-usage-of-vector-index-if-present">Force the usage of vector index, if present</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#abort-the-usage-of-vector-index">Abort the usage of vector index</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#update-vector">Update vector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#delete-vector">Delete vector</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vector-index.html">Vector Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vector-operations.html">Vector Operations</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">CUBRID Vector Database</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Vector DML</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/vector-dml.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="vector-dml">
+<h1>Vector DML<a class="headerlink" href="#vector-dml" title="Link to this heading"></a></h1>
+<p>This page outlines the CRUD operations (Create, Read, Update, Delete)
+for vectors in a database.</p>
+<section id="create-and-insert-a-vector-into-a-table">
+<h2>Create and Insert a Vector into a Table<a class="headerlink" href="#create-and-insert-a-vector-into-a-table" title="Link to this heading"></a></h2>
+<p>To insert vectors into a table:</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">items</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="n">embedding</span>
+<span class="p">)</span>
+<span class="k">VALUES</span>
+<span class="w">  </span><span class="p">(</span><span class="s1">&#39;[1,2,3]&#39;</span><span class="p">),</span>
+<span class="w">  </span><span class="p">(</span><span class="s1">&#39;[4,5,6]&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="read-vectors">
+<h2>Read Vectors<a class="headerlink" href="#read-vectors" title="Link to this heading"></a></h2>
+<p>To retrieve vectors from the table:</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">items</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+</pre></div>
+</div>
+<section id="read-nearest-neighbor-vectors">
+<h3>Read Nearest Neighbor Vectors<a class="headerlink" href="#read-nearest-neighbor-vectors" title="Link to this heading"></a></h3>
+<p>You can retrieve the nearest neighbors using either vector distance
+operators or functions.</p>
+<p>Using a distance operator:</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">items</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">embedding</span><span class="w"> </span><span class="o">&lt;-&gt;</span><span class="w"> </span><span class="s1">&#39;[3,1,2]&#39;</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Using a distance function:</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">items</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">l2_distance</span><span class="p">(</span><span class="n">embedding</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;[3, 1, 2]&#39;</span><span class="p">)</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Both of the above queries are equivalent.</p>
+<ul class="simple">
+<li><p>If no vector index is present, the “exact nearest neighbor” algorithm
+is applied.</p></li>
+<li><p>If a vector index exists, it will be used automatically.</p></li>
+</ul>
+<section id="note-on-multiple-vector-indices">
+<h4>Note on Multiple Vector Indices<a class="headerlink" href="#note-on-multiple-vector-indices" title="Link to this heading"></a></h4>
+<p>You can create multiple indices for a single vector column, but each
+index must correspond to a different type of distance operator. A single
+vector column can only have one index for each distance type.</p>
+</section>
+</section>
+</section>
+<section id="control-vector-index-usage">
+<h2>Control Vector Index Usage<a class="headerlink" href="#control-vector-index-usage" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">/*+</span> <span class="pre">VECTOR_INDEX_SCAN</span> <span class="pre">(my_col_name)</span> <span class="pre">*/</span></code>: force vector index</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/*+</span> <span class="pre">NO_VECTOR_INDEX_SCAN</span> <span class="pre">*/</span></code>: force prevent vector index</p></li>
+</ul>
+<section id="force-the-usage-of-vector-index-if-present">
+<h3>Force the usage of vector index, if present<a class="headerlink" href="#force-the-usage-of-vector-index-if-present" title="Link to this heading"></a></h3>
+<p>First, you need to create an ANN vector index on ‘embedding’ column of
+table ‘items’.</p>
+<p>Refer to <a class="reference external" href="./vector-index.md">Vector Index</a> page.</p>
+<p>You can place a hint to force the optimizer to use the vector index if
+present. If no index is found, the optimizer silently ignores the hint.</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="cm">/*+ VECTOR_INDEX_SCAN (my_col_name) */</span><span class="w"> </span><span class="n">name</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">items</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">l2_distance</span><span class="p">(</span><span class="n">embedding</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;[3, 1, 2]&#39;</span><span class="p">)</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="abort-the-usage-of-vector-index">
+<h3>Abort the usage of vector index<a class="headerlink" href="#abort-the-usage-of-vector-index" title="Link to this heading"></a></h3>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="cm">/*+ NO_VECTOR_INDEX_SCAN */</span><span class="w"> </span><span class="n">name</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">items</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">l2_distance</span><span class="p">(</span><span class="n">embedding</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;[3, 1, 2]&#39;</span><span class="p">)</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="update-vector">
+<h2>Update vector<a class="headerlink" href="#update-vector" title="Link to this heading"></a></h2>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">UPDATE</span><span class="w"> </span><span class="n">items</span>
+<span class="k">SET</span><span class="w"> </span><span class="n">embedding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;[1, 2, 3]&#39;</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="delete-vector">
+<h2>Delete vector<a class="headerlink" href="#delete-vector" title="Link to this heading"></a></h2>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">items</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="vector-ddl.html" class="btn btn-neutral float-left" title="Vector DDL" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="vector-index.html" class="btn btn-neutral float-right" title="Vector Index" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, CUBRID.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
