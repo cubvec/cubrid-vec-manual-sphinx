@@ -66,7 +66,6 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#id1">Vector Distance Functions</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#l2-distance-vector-vector-double">L2_DISTANCE (vector, vector) -&gt; double</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#l2-normalize-vector-vector-double">L2_NORMALIZE (vector, vector) -&gt; double</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#l1-distance-vector-vector-double">L1_DISTANCE (vector, vector) -&gt; double</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#cosine-distance-vector-vector-double">COSINE_DISTANCE (vector, vector) -&gt; double</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#inner-product-vector-vector-double">INNER_PRODUCT (vector, vector) -&gt; double</a></li>
@@ -108,21 +107,20 @@
 <section id="basic-vector-functions">
 <h3>Basic Vector Functions<a class="headerlink" href="#basic-vector-functions" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p>vector_dims(vector) -&gt; integer</p></li>
-<li><p>vector_dimension_count(vector) -&gt; integer</p></li>
-<li><p>vector_norm(vector) -&gt; double</p></li>
-<li><p>vector_dimension_format(vector) -&gt; INT8 | FLOAT32 | FLOAT64</p></li>
-<li><p>☐ TODO: Discuss vector_dimension_format output</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">vector_dims(vector)</span> <span class="pre">-&gt;</span> <span class="pre">integer</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">vector_dimension_count(vector)</span> <span class="pre">-&gt;</span> <span class="pre">integer</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">vector_norm(vector)</span> <span class="pre">-&gt;</span> <span class="pre">double</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">vector_dimension_format(vector)</span> <span class="pre">-&gt;</span> <span class="pre">INT8</span> <span class="pre">|</span> <span class="pre">FLOAT32</span> <span class="pre">|</span> <span class="pre">FLOAT64</span></code></p></li>
+<li><p>☐ TODO: Discuss <cite>vector_dimension_format</cite> output</p></li>
 </ul>
 </section>
 <section id="vector-distance-functions">
 <h3>Vector Distance Functions<a class="headerlink" href="#vector-distance-functions" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p>l2_distance()</p></li>
-<li><p>l2_normalize()</p></li>
-<li><p>l1_distance()</p></li>
-<li><p>cosine_distance()</p></li>
-<li><p>inner_product()</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">l2_distance(vector1,</span> <span class="pre">vector2)</span> <span class="pre">-&gt;</span> <span class="pre">double</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">l1_distance(vector1,</span> <span class="pre">vector2)</span> <span class="pre">-&gt;</span> <span class="pre">double</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cosine_distance(vector1,</span> <span class="pre">vector2)</span> <span class="pre">-&gt;</span> <span class="pre">double</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">inner_product(vector1,</span> <span class="pre">vector2)</span> <span class="pre">-&gt;</span> <span class="pre">double</span></code></p></li>
 </ul>
 </section>
 </section>
@@ -159,24 +157,33 @@
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>VECTOR_DIMS and VECTOR_DIMENSION_COUNT are equivalent.</p></li>
-<li><p>It returns the number of dimensions of a vector as a NUMBER.</p></li>
-<li><p>EXPR must evaluate to a vector.</p></li>
-<li><p>If EXPR is NULL, NULL is returned.</p></li>
-<li><p>☐ TODO: should it return a NUMBER?</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VECTOR_DIMS</span></code> and <code class="docutils literal notranslate"><span class="pre">VECTOR_DIMENSION_COUNT</span></code> are equivalent.</p></li>
+<li><p>Returns the number of dimensions of a vector as an INTEGER.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">EXPR</span></code> must evaluate to a vector.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">EXPR</span></code> is NULL, NULL is returned.</p></li>
+<li><p>☐ TODO: should it return an INTEGER or a NUMBER?</p></li>
 </ul>
 </section>
 <section id="vector-norm-vector-double">
-<span id="vector-dimsvector-integer-1"></span><h3>VECTOR_NORM (vector) -&gt; double<a class="headerlink" href="#vector-norm-vector-double" title="Link to this heading"></a></h3>
+<h3>VECTOR_NORM (vector) -&gt; double<a class="headerlink" href="#vector-norm-vector-double" title="Link to this heading"></a></h3>
 <div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="n">VECTOR_NORM</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">EXPR</span><span class="w"> </span><span class="p">)</span>
 </pre></div>
 </div>
+<ul class="simple">
+<li><p>Returns the norm (magnitude) of a vector.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">EXPR</span></code> is NULL, NULL is returned.</p></li>
+</ul>
 </section>
 <section id="vector-dimension-format-vector-int8-float32-float64">
 <h3>VECTOR_DIMENSION_FORMAT (vector) -&gt; INT8 | FLOAT32 | FLOAT64<a class="headerlink" href="#vector-dimension-format-vector-int8-float32-float64" title="Link to this heading"></a></h3>
 <div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="n">VECTOR_DIMENSION_FORMAT</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">EXPR</span><span class="w"> </span><span class="p">)</span>
 </pre></div>
 </div>
+<ul class="simple">
+<li><p>Returns the data type format of the vector elements: <code class="docutils literal notranslate"><span class="pre">INT8</span></code>,
+<code class="docutils literal notranslate"><span class="pre">FLOAT32</span></code>, or <code class="docutils literal notranslate"><span class="pre">FLOAT64</span></code>.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">EXPR</span></code> is NULL, NULL is returned.</p></li>
+</ul>
 </section>
 </section>
 <section id="id1">
@@ -186,33 +193,47 @@
 </ul>
 <section id="l2-distance-vector-vector-double">
 <h3>L2_DISTANCE (vector, vector) -&gt; double<a class="headerlink" href="#l2-distance-vector-vector-double" title="Link to this heading"></a></h3>
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="n">L2_DISTANCE</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">EXPR</span><span class="w"> </span><span class="p">)</span>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="n">L2_DISTANCE</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">EXPR1</span><span class="p">,</span><span class="w"> </span><span class="n">EXPR2</span><span class="w"> </span><span class="p">)</span>
 </pre></div>
 </div>
-</section>
-<section id="l2-normalize-vector-vector-double">
-<h3>L2_NORMALIZE (vector, vector) -&gt; double<a class="headerlink" href="#l2-normalize-vector-vector-double" title="Link to this heading"></a></h3>
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="n">L2_NORMALIZE</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">EXPR</span><span class="w"> </span><span class="p">)</span>
-</pre></div>
-</div>
+<ul class="simple">
+<li><p>Returns the L2 (Euclidean) distance between two vectors.</p></li>
+<li><p>Both expressions must evaluate to vectors.</p></li>
+<li><p>If any of the expressions is NULL, NULL is returned.</p></li>
+</ul>
 </section>
 <section id="l1-distance-vector-vector-double">
 <h3>L1_DISTANCE (vector, vector) -&gt; double<a class="headerlink" href="#l1-distance-vector-vector-double" title="Link to this heading"></a></h3>
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="n">L1_DISTANCE</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">EXPR</span><span class="w"> </span><span class="p">)</span>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="n">L1_DISTANCE</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">EXPR1</span><span class="p">,</span><span class="w"> </span><span class="n">EXPR2</span><span class="w"> </span><span class="p">)</span>
 </pre></div>
 </div>
+<ul class="simple">
+<li><p>Returns the L1 (Manhattan) distance between two vectors.</p></li>
+<li><p>Both expressions must evaluate to vectors.</p></li>
+<li><p>If any of the expressions is NULL, NULL is returned.</p></li>
+</ul>
 </section>
 <section id="cosine-distance-vector-vector-double">
 <h3>COSINE_DISTANCE (vector, vector) -&gt; double<a class="headerlink" href="#cosine-distance-vector-vector-double" title="Link to this heading"></a></h3>
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="n">COSINE_DISTANCE</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">EXPR</span><span class="w"> </span><span class="p">)</span>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="n">COSINE_DISTANCE</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">EXPR1</span><span class="p">,</span><span class="w"> </span><span class="n">EXPR2</span><span class="w"> </span><span class="p">)</span>
 </pre></div>
 </div>
+<ul class="simple">
+<li><p>Returns the cosine distance between two vectors.</p></li>
+<li><p>Both expressions must evaluate to vectors.</p></li>
+<li><p>If any of the expressions is NULL, NULL is returned.</p></li>
+</ul>
 </section>
 <section id="inner-product-vector-vector-double">
 <h3>INNER_PRODUCT (vector, vector) -&gt; double<a class="headerlink" href="#inner-product-vector-vector-double" title="Link to this heading"></a></h3>
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="n">INNER_PRODUCT</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">EXPR</span><span class="w"> </span><span class="p">)</span>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="n">INNER_PRODUCT</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">EXPR1</span><span class="p">,</span><span class="w"> </span><span class="n">EXPR2</span><span class="w"> </span><span class="p">)</span>
 </pre></div>
 </div>
+<ul class="simple">
+<li><p>Returns the inner product (dot product) of two vectors.</p></li>
+<li><p>Both expressions must evaluate to vectors.</p></li>
+<li><p>If any of the expressions is NULL, NULL is returned.</p></li>
+</ul>
 </section>
 </section>
 </section>
