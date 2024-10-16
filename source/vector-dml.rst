@@ -106,8 +106,8 @@ Force the Usage of a Vector Index
 To explicitly tell the optimizer to use a vector index for a query,
 first ensure that an ANN vector index exists on the `embedding` column.
 
-Refer to the `Vector Index <./vector-index.md>`__ page for index
-creation details.
+Refer to the `Vector Index` :doc:`vector-index` page for index creation
+details.
 
 .. code:: sql
 
